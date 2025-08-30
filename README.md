@@ -44,6 +44,24 @@ githubCsvTools myFile.csv
 githubCsvTools
 ```
 
+**Complete Workflow Example:**
+
+```bash
+# 1. Export issues with comments from a repository
+githubCsvTools -o Cookie-AutoDelete -r Cookie-AutoDelete -c -f issues-with-comments.csv
+
+# 2. Clean and organize the exported data
+python3 clean_csv.py
+
+# 3. Analyze the cleaned data
+python3 analyze_csv.py
+
+# 4. Generate an HTML report
+python3 generate_report.py
+```
+
+This workflow transforms raw GitHub data into clean, analyzable CSV files and professional reports.
+
 | Option                 | Default                                                                                               | Notes                                                                                                                                                                                                         |
 | ---------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | -f, --exportFileName   | YYYY-MM-DD-hh-mm-ss-issues.csv                                                                        | The name of the CSV you'd like to export to.                                                                                                                                                                  |
@@ -74,6 +92,54 @@ For all actions, the tool will ask you to input a GitHub token. To obtain this t
 | --csvDelimiter          | The CSV delimiter character (defaults to ',')                                 |
 | -v, --verbose           | Include additional logging information.                                       |
 | -h, --help              | See all the options and help.                                                 |
+
+## CSV Cleaning and Analysis Tools
+
+After exporting large CSV files, you may find the data needs cleaning and organization. We've included several Python scripts to help:
+
+### Clean and Organize CSV Data
+
+```bash
+python3 clean_csv.py
+```
+
+This script:
+- Removes HTML tags from issue bodies and comments
+- Truncates long text fields for better readability
+- Organizes columns with clear naming conventions
+- Adds row type indicators (issue vs comment)
+- Decodes HTML entities
+- Removes extra whitespace
+
+### Analyze CSV Data
+
+```bash
+python3 analyze_csv.py
+```
+
+Provides insights including:
+- Total issues and comments count
+- Issue status breakdown (open/closed)
+- Top labels and their frequencies
+- Most active users and commenters
+- Date range of issues
+- Recent activity summary
+
+### Generate HTML Report
+
+```bash
+python3 generate_report.py
+```
+
+Creates a beautiful, interactive HTML report (`cookie-autodelete-report.html`) with:
+- Visual statistics and charts
+- Organized tables of top contributors
+- Recent issues overview
+- Professional styling for easy sharing
+
+### Requirements
+
+The analysis tools require Python 3 and standard libraries (no additional packages needed).
 
 ## Development
 
